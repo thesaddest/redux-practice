@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {addCustomerAction, removeCustomerAction} from "./store/customersReducer";
+import {fetchCustomers} from "./asyncActions/customers";
 
 const ADD_CASH = "ADD_CASH"
 const WITHDRAW_CASH = "WITHDRAW_CASH"
@@ -39,6 +40,7 @@ function App() {
           <div style={{display: 'flex'}}>
               <button onClick={() => addCash(Number(prompt()))}>ADD CASH</button>
               <button onClick={() => withdrawCash(Number(prompt()))}>WITHDRAW CASH</button>
+              <button onClick={() => dispatch(fetchCustomers())}>GET CUSTOMERS FROM DATABASE</button>
               <button onClick={() => addCustomer(prompt())}>ADD CUSTOMER</button>
               <button onClick={() => withdrawCash(Number(prompt()))}>DELETE CUSTOMER</button>
           </div>
