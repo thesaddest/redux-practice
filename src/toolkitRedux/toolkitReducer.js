@@ -2,7 +2,6 @@ import {createAction, createReducer} from "@reduxjs/toolkit";
 
 const initialState = {
     count: 0,
-    todos:['code', 'eat', 'workout', 'code', 'sleep', 'repeat']
 }
 
 export const increment = createAction('INCREMENT')
