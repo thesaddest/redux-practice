@@ -1,11 +1,9 @@
 import React from 'react';
 import './App.css';
 import {useDispatch, useSelector} from 'react-redux';
-import {addCustomerAction, removeCustomerAction} from "./store/customersReducer";
+import {addCustomerAction, fetchCustomersAction, removeCustomerAction} from "./store/customersReducer";
 import {fetchCustomers} from "./asyncActions/customers";
-
-const ADD_CASH = "ADD_CASH"
-const WITHDRAW_CASH = "WITHDRAW_CASH"
+import {addCashAction, asyncDecrementAction, asyncIncrementAction, withdrawCashAction} from "./store/cashReducer";
 
 
 function App() {
@@ -14,11 +12,11 @@ function App() {
     const customers = useSelector(state => state.customers.customers)
 
     const addCash = (cash) => {
-        dispatch({type: ADD_CASH, payload: cash})
+        dispatch(addCashAction(cash))
     }
 
     const withdrawCash = (cash) => {
-        dispatch({type: WITHDRAW_CASH, payload: cash})
+        dispatch(withdrawCashAction(cash))
     }
 
     const addCustomer = (name) => {
@@ -38,11 +36,10 @@ function App() {
       <div className={'app'}>
           <div style={{fontSize:'3rem'}}>{cash}</div>
           <div style={{display: 'flex'}}>
-              <button onClick={() => addCash(Number(prompt()))}>ADD CASH</button>
-              <button onClick={() => withdrawCash(Number(prompt()))}>WITHDRAW CASH</button>
-              <button onClick={() => dispatch(fetchCustomers())}>GET CUSTOMERS FROM DATABASE</button>
+              <button onClick={() => dispatch(asyncIncrementAction())}>ADD CASH</button>
+              <button onClick={() => dispatch(asyncDecrementAction())}>WITHDRAW CASH</button>
+              <button onClick={() => dispatch(fetchCustomersAction())}>GET CUSTOMERS FROM DATABASE</button>
               <button onClick={() => addCustomer(prompt())}>ADD CUSTOMER</button>
-              <button onClick={() => withdrawCash(Number(prompt()))}>DELETE CUSTOMER</button>
           </div>
           {customers.length
               ?
